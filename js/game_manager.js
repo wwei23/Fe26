@@ -357,7 +357,7 @@ GameManager.prototype.fusion = function (first, second) {
 GameManager.prototype.fusionRules =function(){ return {
   "Hydrogen":{"Hydrogen":"Deuteron",
 							"Deuteron":"3Helium",
-	      						"7Li","4Helium"
+	      						"7Li":"4Helium"
 						 },
   "3Helium":{"3Helium":"4Helium",
 							"4Helium":"7Beryllium"
