@@ -409,6 +409,9 @@ GameManager.prototype.getLabel=function(nuclide){
 	while((1*nuclide.slice(0,x)+"")==="NaN"){
 		x-=1;
 	}
+	if(nuclide[x]==="m"){//Handle isomers
+		x+=1;
+	}
 	var y=nuclide.length-x;
 	return "<sup>"+nuclide.slice(0,x)+"</sup>"+nuclide.slice(-y);
 };
