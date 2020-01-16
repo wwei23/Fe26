@@ -79,7 +79,12 @@ GameManager.prototype.addStartTiles = function () {
 GameManager.prototype.addRandomTile = function () {
   if (this.grid.cellsAvailable()) {
     var value = Math.random() < 0.9 ? "Hydrogen" : "Deuteron";
-    var tile = new Tile(this.grid.randomAvailableCell(), value, this.labels[value]);
+	  var tile;
+    if(this.labels[value] || false){
+     tile = new Tile(this.grid.randomAvailableCell(), value, this.labels[value]);
+  }else{
+	  tile = new Tile(this.grid.randomAvailableCell(), value, this.getLabel(value));
+  }
 
     this.grid.insertTile(tile);
   }
@@ -169,13 +174,19 @@ GameManager.prototype.move = function (direction) {
           if( self.canFuse(next.value,tile.value) ) {
             shouldMove = false;
             var fusionValue = self.fusion(next.value,tile.value);
-            var merged = new Tile(positions.next, fusionValue, self.labels[fusionValue]);
+		  var merged;
+		  if(self.labels[fusionValue] || false){
+            		merged=new Tile(positions.next, fusionValue, self.labels[fusionValue]);
+		  }else{
+            		merged=new Tile(positions.next, fusionValue, self.getLabel(fusionValue));
+		  }
             merged.mergedFrom = [tile, next];
 
-            var decay = self.decay[fusionValue] || false;
-
+            var decay = self.decay()[fusionValue] || false;
+	    var multipler=decay['multipler'];
+	    multipler=-16.0867+0.0441756*Math.pow(Math.log(multipler),3)+22.6055*Math.pow(Math.log(multipler),0.04);
             if(decay !== false) {
-              merged.movesLeft = Math.floor(Math.random() * (Math.ceil(8*decay['multipler']) - Math.ceil(4*decay['multipler']) + 1)) + Math.ceil(4*decay['multipler']);
+              merged.movesLeft = Math.floor(Math.random() * (Math.ceil(8*multipler) - Math.ceil(4*multipler) + 1)) + Math.ceil(4*multipler);
             }
 
             self.grid.insertTile(merged);
@@ -185,7 +196,11 @@ GameManager.prototype.move = function (direction) {
             tile.updatePosition(positions.next);
 
             // Update the score
-            self.score += self.pointValues[merged.value];
+	    if(self.pointValues[merged.value] || false){
+            	self.score += self.pointValues[merged.value];
+	    }else{
+		    self.score+=self.getPoints[merged.value]/2;
+	    }
 
             // TODO win state ( if not decaying )
             if (merged.value === self.winningValue) self.won = true;
@@ -206,16 +221,28 @@ GameManager.prototype.move = function (direction) {
     this.addRandomTile();
 
     this.grid.eachCell(function(x, y, tile) {
-      if(tile !== null && self.decay[tile.value] && tile.decay()) {
-        var decayValue = self.decay[tile.value]['to'];
-        var decayed = new Tile({
+      if(tile !== null && self.decay()[tile.value] && tile.decay()) {
+        var decayValue = self.decay()[tile.value]['to'];
+	      var decayed = new Tile({
           x: tile.x,
           y: tile.y
         }, decayValue, self.labels[decayValue]);
+	      if(self.labels[decayValue] || false){
+        decayed = new Tile({
+          x: tile.x,
+          y: tile.y
+        }, decayValue, self.labels[decayValue]);
+	      }else{
+        decayed = new Tile({
+          x: tile.x,
+          y: tile.y
+        }, decayValue, self.getLabel(decayValue));
+	      }
         self.grid.removeTile(tile);
         self.grid.insertTile(decayed);
-
-        self.score += self.decay[tile.value].points;
+	if(self.decay()[tile.value].points || false){
+          self.score += self.decay()[tile.value].points;
+	}
 
         if (decayed.value === self.winningValue) self.won = true;
       }
@@ -311,25 +338,26 @@ GameManager.prototype.positionsEqual = function (first, second) {
 };
 
 GameManager.prototype.canFuse = function (first, second) {
-  return (this.fusionRules[first]  && this.fusionRules[first][second]) ||
-         (this.fusionRules[second] && this.fusionRules[second][first]);
+  return (this.fusionRules()[first]  && this.fusionRules()[first][second]) ||
+         (this.fusionRules()[second] && this.fusionRules()[second][first]);
 };
 
 GameManager.prototype.fusion = function (first, second) {
-  var forward = this.fusionRules[first];
+  var forward = this.fusionRules()[first];
   if (forward && forward[second]) {
     return forward[second];
   } else {
-    var backward = this.fusionRules[second][first];
+    var backward = this.fusionRules()[second][first];
     return backward;
   }
 };
 
 // a:{b:c}
 // a + b = c
-GameManager.prototype.fusionRules = {
+GameManager.prototype.fusionRules =function(){ return {
   "Hydrogen":{"Hydrogen":"Deuteron",
-							"Deuteron":"3Helium"
+							"Deuteron":"3Helium",
+	      						"7Li","4Helium"
 						 },
   "3Helium":{"3Helium":"4Helium",
 							"4Helium":"7Beryllium"
@@ -339,6 +367,7 @@ GameManager.prototype.fusionRules = {
 						 "12Carbon":"16Oxygen",
 						 "16Oxygen":"20Neon",
 						 "20Neon":"24Magnesium", // this is a killer!
+						 "24Magnesium":"28Silicon", //Nah I don't feel like it
 						 "28Silicon":"32Sulfur",
 						 "32Sulfur":"36Argon",
 						 "36Argon":"40Calcium",
@@ -351,7 +380,7 @@ GameManager.prototype.fusionRules = {
              },
   "12Carbon":{"12Carbon":"20Neon", // + 4Helium (randomness)
 						 }
-};
+}};
 
 GameManager.prototype.labels = {
   "Hydrogen": "Hydrogen",
@@ -374,7 +403,21 @@ GameManager.prototype.labels = {
   "56Nickel": "<sup>56</sup>Nickel",
   "56Iron": "<sup>56</sup>Iron"
 };
-
+GameManager.prototype.getLabel=function(nuclide){
+	var x=nuclide.length;
+	while((1*nuclide.slice(0,x)+"")==="NaN"){
+		x-=1;
+	}
+	var y=nuclide.length-x;
+	return "<sup>"+nuclide.slice(0,x)+"</sup>"+nuclide.slice(-y);
+};
+GameManager.prototype.getPoints=function(nuclide){
+	var x=nuclide.length;
+	while((1*nuclide.slice(0,x)+"")==="NaN"){
+		x-=1;
+	}
+	return 1*nuclide.slice(0,x);
+};
 GameManager.prototype.pointValues = {
   "Deuteron":1,
   "3Helium":1.5,
@@ -396,30 +439,20 @@ GameManager.prototype.pointValues = {
   "56Iron":56
 };
 
-GameManager.prototype.decay = {
+GameManager.prototype.decay =function(){return {
   "7Beryllium": {
-    "multipler": "3",
-    "to": "4Helium",
+    "multipler": 53.22*86400,
+    "to": "7Li",
 		"points": -3
   },
   "8Beryllium": {
-    "multipler": "1",
+    "multipler": 8.19*Math.pow(10,-17),
     "to": "4Helium",
 		"points": -4
   },
-  "20Neon": {
-    "multipler": "2.5",
-    "to": "16Oxygen",
-		"points": -10
-  },
-  "52Iron": {
-    "multipler": "2",
-    "to": "48Chromium",
-		"points": -26
-  },
   "56Nickel": {
-    "multipler": "1.5",
+    "multipler": 6.075*86400,
     "to": "56Iron",
 		"points": 56
   }
-};
+}};
