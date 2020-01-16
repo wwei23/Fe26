@@ -172,7 +172,7 @@ GameManager.prototype.move = function (direction) {
             var merged = new Tile(positions.next, fusionValue, self.labels[fusionValue]);
             merged.mergedFrom = [tile, next];
 
-            var decay = self.decay[fusionValue] || false;
+            var decay = self.decay()[fusionValue] || false;
 
             if(decay !== false) {
               merged.movesLeft = Math.floor(Math.random() * (Math.ceil(8*decay['multipler']) - Math.ceil(4*decay['multipler']) + 1)) + Math.ceil(4*decay['multipler']);
@@ -206,8 +206,8 @@ GameManager.prototype.move = function (direction) {
     this.addRandomTile();
 
     this.grid.eachCell(function(x, y, tile) {
-      if(tile !== null && self.decay[tile.value] && tile.decay()) {
-        var decayValue = self.decay[tile.value]['to'];
+      if(tile !== null && self.decay()[tile.value] && tile.decay()) {
+        var decayValue = self.decay()[tile.value]['to'];
         var decayed = new Tile({
           x: tile.x,
           y: tile.y
@@ -215,7 +215,7 @@ GameManager.prototype.move = function (direction) {
         self.grid.removeTile(tile);
         self.grid.insertTile(decayed);
 
-        self.score += self.decay[tile.value].points;
+        self.score += self.decay()[tile.value].points;
 
         if (decayed.value === self.winningValue) self.won = true;
       }
@@ -311,23 +311,23 @@ GameManager.prototype.positionsEqual = function (first, second) {
 };
 
 GameManager.prototype.canFuse = function (first, second) {
-  return (this.fusionRules[first]  && this.fusionRules[first][second]) ||
-         (this.fusionRules[second] && this.fusionRules[second][first]);
+  return (this.fusionRules()[first]  && this.fusionRules()[first][second]) ||
+         (this.fusionRules()[second] && this.fusionRules()[second][first]);
 };
 
 GameManager.prototype.fusion = function (first, second) {
-  var forward = this.fusionRules[first];
+  var forward = this.fusionRules()[first];
   if (forward && forward[second]) {
     return forward[second];
   } else {
-    var backward = this.fusionRules[second][first];
+    var backward = this.fusionRules()[second][first];
     return backward;
   }
 };
 
 // a:{b:c}
 // a + b = c
-GameManager.prototype.fusionRules = {
+GameManager.prototype.fusionRules =function(){ return {
   "Hydrogen":{"Hydrogen":"Deuteron",
 							"Deuteron":"3Helium"
 						 },
@@ -351,7 +351,7 @@ GameManager.prototype.fusionRules = {
              },
   "12Carbon":{"12Carbon":"20Neon", // + 4Helium (randomness)
 						 }
-};
+}};
 
 GameManager.prototype.labels = {
   "Hydrogen": "Hydrogen",
@@ -396,7 +396,7 @@ GameManager.prototype.pointValues = {
   "56Iron":56
 };
 
-GameManager.prototype.decay = {
+GameManager.prototype.decay =function(){return {
   "7Beryllium": {
     "multipler": "3",
     "to": "4Helium",
@@ -422,4 +422,4 @@ GameManager.prototype.decay = {
     "to": "56Iron",
 		"points": 56
   }
-};
+}};
