@@ -185,7 +185,7 @@ GameManager.prototype.move = function (direction) {
             var decay = self.decay()[fusionValue] || false;
 	    var multipler=decay['multipler'];
 	    multipler=Math.log(multipler)/Math.log(10);
-	    multipler=-16.0867+0.0441756*Math.pow(Math.log(multipler),3)+22.6055*Math.pow(Math.log(multipler),0.04);
+	    multipler=self.getMultipler(multipler);
             if(decay !== false) {
               merged.movesLeft = Math.floor(Math.random() * (Math.ceil(8*multipler) - Math.ceil(4*multipler) + 1)) + Math.ceil(4*multipler);
             }
@@ -439,7 +439,24 @@ GameManager.prototype.pointValues = {
   "56Nickel":28,
   "56Iron":56
 };
-
+GameManager.prototype.getMultipler=function(x){
+	//Inverse:
+	//x=-c+b*ln(m)^(1/25)+a*ln(m)^(2/25)
+	//x is ln(half-life in seconds)
+	//y is multipler
+	//This function has been tailored to fit the original multiplers of 7Be, 8Be, and 56Ni.
+	var a=1.40957;
+	var b=21.249;
+	var c=16.0867;
+	var d=274.448763451;//Derivative of this function at 8, because f(9) is over 50000, and I think that's far too long.
+	var f8=Math.exp(Math.pow((-b+Math.sqrt(b*b+4*a*(c+8)))/(2*a),25));
+	if(x<=8){
+		return Math.exp(Math.pow((-b+Math.sqrt(b*b+4*a*(c+x)))/(2*a),25));
+	}else{
+		return f8+d*(x-8);//Inverse:
+				  //x=(m-f8)/d+8
+	}
+};
 GameManager.prototype.decay =function(){return {
   "7Beryllium": {
     "multipler": 53.22*86400,
