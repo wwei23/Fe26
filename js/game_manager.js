@@ -184,6 +184,7 @@ GameManager.prototype.move = function (direction) {
 
             var decay = self.decay()[fusionValue] || false;
 	    var multipler=decay['multipler'];
+	    multipler=Math.log(multipler)/Math.log(10);
 	    multipler=-16.0867+0.0441756*Math.pow(Math.log(multipler),3)+22.6055*Math.pow(Math.log(multipler),0.04);
             if(decay !== false) {
               merged.movesLeft = Math.floor(Math.random() * (Math.ceil(8*multipler) - Math.ceil(4*multipler) + 1)) + Math.ceil(4*multipler);
