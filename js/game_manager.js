@@ -384,9 +384,9 @@ GameManager.prototype.fusionRules =function(){ return {
 						 "48Chromium":"52Iron",
 						 "52Iron":"56Nickel",
 						 "56Nickel":"60Zn",
-						 "44Calcium":"48Ti,
-						 "48Titanium":"52Cr",
-						 "52Chromium":"56Iron",
+						 "44Ca":"48Ti",
+						 "48Ti":"52Cr",
+						 "52Cr":"56Iron",
 						 "56Iron":"60Ni"
 						},
     "7Beryllium":{"Hydrogen":"8B"
