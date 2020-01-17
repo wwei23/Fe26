@@ -384,7 +384,7 @@ GameManager.prototype.fusionRules =function(){ return {
 						 "48Chromium":"52Iron",
 						 "52Iron":"56Nickel"
 						},
-    "7Beryllium":{"Hydrogen":"8Boron"
+    "7Beryllium":{"Hydrogen":"8B"
              },
   "12Carbon":{"12Carbon":["20Neon","23Na","23Mg","24Magnesium","16Oxygen"][Math.floor(5*Math.random())], // + 4Helium (randomness)
 						 },
@@ -486,7 +486,7 @@ GameManager.prototype.decay =function(){return {
     "to": "4Helium",
 		"points": -4
   },
-  "8Boron":{
+  "8B":{
     "multipler":0.77,
     "to":"8Beryllium"
   },
