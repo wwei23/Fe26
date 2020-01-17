@@ -377,11 +377,19 @@ GameManager.prototype.fusionRules =function(){ return {
 						 "48Chromium":"52Iron",
 						 "52Iron":"56Nickel"
 						},
-  "16Oxygen":{"16Oxygen":"28Silicon", // + 4Helium
+    "7Beryllium":{"Hydrogen":"8Boron"
              },
-  "12Carbon":{"12Carbon":"20Neon", // + 4Helium (randomness)
-						 }
-}};
+  "12Carbon":{"12Carbon":["20Neon","23Na","23Mg","24Magnesium","16Oxygen"][Math.floor(5*Math.random())], // + 4Helium (randomness)
+						 },
+  "16Oxygen":{"16Oxygen":["28Silicon","31P","31S","30Si","30P","32Sulfur","24Magnesium"][Math.floor(7*Math.random())], // + 4Helium
+             },
+  "23Na":{"Hydrogen":"24Magnesium"
+             },
+  "30Si":{"Hydrogen":"31P"
+             },
+  "31P":{"Hydrogen":"32S"
+             }
+};
 
 GameManager.prototype.labels = {
   "Hydrogen": "Hydrogen",
@@ -470,6 +478,22 @@ GameManager.prototype.decay =function(){return {
     "multipler": 8.19*Math.pow(10,-17),
     "to": "4Helium",
 		"points": -4
+  },
+  "8Boron":{
+    "multipler":0.77,
+    "to":"8Beryllium"
+  },
+  "23Mg":{
+    "multipler":11.317,
+    "to":"23Na"
+  },
+  "30P":{
+    "multipler":2.498*60,
+    "to":"30Si"
+  },
+  "31S":{
+    "multipler":2.5534,
+    "to":"31P"
   },
   "56Nickel": {
     "multipler": 6.075*86400,
