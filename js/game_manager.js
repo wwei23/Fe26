@@ -200,7 +200,7 @@ GameManager.prototype.move = function (direction) {
 	    if(self.pointValues[merged.value] || false){
             	self.score += self.pointValues[merged.value];
 	    }else{
-		    self.score+=self.getPoints[merged.value]/2;
+		    self.score+=self.getPoints(merged.value)/2;
 	    }
 
             // TODO win state ( if not decaying )
