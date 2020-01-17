@@ -389,7 +389,7 @@ GameManager.prototype.fusionRules =function(){ return {
              },
   "31P":{"Hydrogen":"32S"
              }
-};
+}};
 
 GameManager.prototype.labels = {
   "Hydrogen": "Hydrogen",
@@ -500,4 +500,4 @@ GameManager.prototype.decay =function(){return {
     "to": "56Iron",
 		"points": 56
   }
-});
+}};
