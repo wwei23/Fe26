@@ -382,7 +382,12 @@ GameManager.prototype.fusionRules =function(){ return {
 						 "40Calcium":"44Titanium",
 						 "44Titanium":"48Chromium",
 						 "48Chromium":"52Iron",
-						 "52Iron":"56Nickel"
+						 "52Iron":"56Nickel",
+						 "56Nickel":"60Zn",
+						 "44Calcium":"48Ti,
+						 "48Titanium":"52Cr",
+						 "52Chromium":"56Iron",
+						 "56Iron":"60Ni"
 						},
     "7Beryllium":{"Hydrogen":"8B"
              },
@@ -502,9 +507,50 @@ GameManager.prototype.decay =function(){return {
     "multipler":2.5534,
     "to":"31P"
   },
+  "44Sc":{
+    "multipler":3.97*3600,
+    "to":"44Ca"
+  },
+  "44Titanium":{
+    "multipler":60*365.2425*86400,
+    "to":"44Sc"
+  },
+  "48V":{
+    "multipler":15.9735*86400,
+    "to":"48Ti"
+  },
+  "48Chromium":{
+    "multipler":21.56*3600,
+    "to":"48V"
+  },
+  "52Mn":{
+    "multipler":5.591*86400,
+    "to":"52Cr"
+  },
+  "52mMn":{
+    "multipler":21.1*60,
+    "to":["52Cr","52Mn"][Math.floor(2*Math.random())]
+  },
+  "52Iron":{
+    "multipler":8.275*3600,
+    "to":"52mMn"//Yes isomers :P
+  },
+  "56Co": {
+    "multipler": 77.27*86400,
+    "to": "56Iron",
+		"points": 28
+  },
   "56Nickel": {
     "multipler": 6.075*86400,
-    "to": "56Iron",
-		"points": 56
+    "to": "56Co",
+		"points": 28
+  },
+  "60Cu": {
+    "multipler": 23.7*60,
+    "to": "60Ni"
+  },
+  "60Zn": {
+    "multipler": 2.38*60,
+    "to": "60Cu"
   }
 }};
