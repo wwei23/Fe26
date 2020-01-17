@@ -500,4 +500,4 @@ GameManager.prototype.decay =function(){return {
     "to": "56Iron",
 		"points": 56
   }
-}};
+});
