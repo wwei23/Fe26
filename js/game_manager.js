@@ -384,10 +384,23 @@ GameManager.prototype.fusionRules =function(){ return {
 						 "48Chromium":"52Iron",
 						 "52Iron":"56Nickel",
 						 "56Nickel":"60Zn",
+						 "60Zn":"64Ge",
+						 "64Ge":"68Se",
+						 "68Se":"72Kr",
+						 "72Kr":"76Sr",
+						 "76Sr":"80Zr",
 						 "44Ca":"48Ti",
 						 "48Ti":"52Cr",
 						 "52Cr":"56Iron",
-						 "56Iron":"60Ni"
+						 "56Iron":"60Ni",
+						 "60Ni":"64Zn",
+						 "64Zn":"68Ge",
+						 "68Ge":"72Se",
+						 "72Se":"76Kr",
+						 "76Kr":"80Sr",
+						 "68Zn":"72Ge",
+						 "72Ge":"76Se",
+						 "76Se":"80Kr"
 						},
     "7Beryllium":{"Hydrogen":"8B"
              },
@@ -552,5 +565,77 @@ GameManager.prototype.decay =function(){return {
   "60Zn": {
     "multipler": 2.38*60,
     "to": "60Cu"
+  },
+  "64Ga": {
+    "multipler": 2.627*60,
+    "to": "64Zn"
+  },
+  "68Ga": {
+    "multipler": 67.71*60,
+    "to": "68Zn"
+  },
+  "64Ge": {
+    "multipler": 63.7,
+    "to": "64Ga"
+  },
+  "68Ge": {
+    "multipler": 270.95*86400,
+    "to": "68Ga"
+  },
+  "68As": {
+    "multipler": 151.6,
+    "to": "68Ge"
+  },
+  "72As": {
+    "multipler": 26*3600,
+    "to": "72Ge"
+  },
+  "68Se": {
+    "multipler": 35.5,
+    "to": "68As"
+  },
+  "72Se": {
+    "multipler": 8.4*86400,
+    "to": "72As"
+  },
+  "72Br": {
+    "multipler": 78.6,
+    "to": "72Se"
+  },
+  "76Br": {
+    "multipler": 16.2*86400,
+    "to": "76Se"
+  },
+  "72Kr": {
+    "multipler": 17.15,
+    "to": "72Br"
+  },
+  "76Kr": {
+    "multipler": 14.8*3600,
+    "to": "76Br"
+  },
+  "76Rb": {
+    "multipler": 36.5,
+    "to": ["72Se","76Kr"][Math.floor(2*Math.random())]
+  },
+  "80Rb": {
+    "multipler": 33.4,
+    "to": "80Kr"
+  },
+  "76Sr": {
+    "multipler": 7.89,
+    "to": "76Rb"
+  },
+  "80Sr": {
+    "multipler": 106.3*60,
+    "to": "80Rb"
+  },
+  "80Y": {
+    "multipler": 30.1,
+    "to": "80Sr"
+  },
+  "80Zr": {
+    "multipler": 4.6,
+    "to": "80Y"
   }
 }};
