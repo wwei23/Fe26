@@ -348,12 +348,18 @@ hr {
   .tile.tile-4Helium .tile-inner {
     color: #f9f6f2;
     background: #f5976e; }
+  .tile.tile-7Li .tile-inner {
+    color: #f9f6f2;
+    background: #f6624c; }
   .tile.tile-7Beryllium .tile-inner {
     color: #f9f6f2;
     background: #f67f6c; }
   .tile.tile-8Beryllium .tile-inner {
     color: #f9f6f2;
     background: #f6624c; }
+  .tile.tile-8B .tile-inner {
+    color: #f9f6f2;
+    background: #f67061; }
   .tile.tile-12Carbon .tile-inner {
     color: #f9f6f2;
     background: #edd8a0; }
@@ -363,12 +369,30 @@ hr {
   .tile.tile-20Neon .tile-inner {
     color: #f9f6f2;
     background: #edd48d; }
+  .tile.tile-23Na .tile-inner {
+    color: #f9f6f2;
+    background: #edd48d; }
+  .tile.tile-23Mg .tile-inner {
+    color: #f9f6f2;
+    background: #edd48d; }
   .tile.tile-24Magnesium .tile-inner {
     color: #f9f6f2;
     background: #edd384; }
   .tile.tile-28Silicon .tile-inner {
     color: #f9f6f2;
     background: #edd17a; }
+  .tile.tile-30Si .tile-inner {
+    color: #f9f6f2;
+    background: #edd17a; }
+  .tile.tile-30P .tile-inner {
+    color: #f9f6f2;
+    background: #edd17a; }
+  .tile.tile-31P .tile-inner {
+    color: #f9f6f2;
+    background: #edd075; }
+  .tile.tile-31S .tile-inner {
+    color: #f9f6f2;
+    background: #edd075; }
   .tile.tile-32Sulfur .tile-inner {
     color: #f9f6f2;
     background: #edcf70; }
