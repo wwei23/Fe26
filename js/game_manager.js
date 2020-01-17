@@ -471,13 +471,13 @@ GameManager.prototype.getMultipler=function(x){
 	var a=1.40957;
 	var b=21.249;
 	var c=16.0867;
-	var d=274.448763451;//Derivative of this function at 8, because f(9) is over 50000, and I think that's far too long.
-	var f8=Math.exp(Math.pow((-b+Math.sqrt(b*b+4*a*(c+8)))/(2*a),25));
-	if(x<=8){
+	var d=7.47733608077;//Derivative of this function at 8, because f(9) is over 50000, and I think that's far too long. f(8) is too far because then 44Ti takes over 2000 moves to decay.
+	var f7=Math.exp(Math.pow((-b+Math.sqrt(b*b+4*a*(c+7)))/(2*a),25));
+	if(x<=7){
 		return Math.exp(Math.pow((-b+Math.sqrt(b*b+4*a*(c+x)))/(2*a),25));
 	}else{
-		return f8+d*(x-8);//Inverse:
-				  //x=(m-f8)/d+8
+		return f7+d*(x-7);//Inverse:
+				  //x=(m-f7)/d+7
 	}
 };
 GameManager.prototype.decay =function(){return {
