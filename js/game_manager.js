@@ -224,7 +224,7 @@ GameManager.prototype.move = function (direction) {
     this.grid.eachCell(function(x, y, tile) {
       if(tile !== null && self.decay()[tile.value] && tile.decay()) {
         var decayValue = self.decay()[tile.value]['to'];
-	      var decayed = new Tile({
+	var decayed = new Tile({
           x: tile.x,
           y: tile.y
         }, decayValue, self.labels[decayValue]);
@@ -239,6 +239,13 @@ GameManager.prototype.move = function (direction) {
           y: tile.y
         }, decayValue, self.getLabel(decayValue));
 	      }
+	var decay = self.decay()[decayValue] || false;
+	var multipler=decay['multipler'];
+	multipler=Math.log(multipler)/Math.log(10);
+	multipler=self.getMultipler(multipler);
+        if(decay !== false) {
+          decayed.movesLeft = Math.floor(Math.random() * (Math.ceil(8*multipler) - Math.ceil(4*multipler) + 1)) + Math.ceil(4*multipler);
+        }//8B -> 8Be
         self.grid.removeTile(tile);
         self.grid.insertTile(decayed);
 	if(self.decay()[tile.value].points || false){
@@ -387,7 +394,7 @@ GameManager.prototype.fusionRules =function(){ return {
              },
   "30Si":{"Hydrogen":"31P"
              },
-  "31P":{"Hydrogen":"32S"
+  "31P":{"Hydrogen":"32Sulfur"
              }
 }};
 
