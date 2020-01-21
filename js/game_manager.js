@@ -754,7 +754,7 @@ GameManager.prototype.decay =function(){return {
   },
   "94Rh": {
     "multipler": 70.6,
-    "to": ["93Tc","94Ru"][Math.floor(2*Math.ranodm())]
+    "to": ["93Tc","94Ru"][Math.floor(2*Math.random())]
   },
   "95Rh": {
     "multipler": 5.02*60,
