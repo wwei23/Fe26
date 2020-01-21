@@ -389,6 +389,11 @@ GameManager.prototype.fusionRules =function(){ return {
 						 "68Se":"72Kr",
 						 "72Kr":"76Sr",
 						 "76Sr":"80Zr",
+						 "80Zr":"84Mo",
+						 "84Mo":"88Ru",
+						 "88Ru":"92Pd",
+						 "92Pd":"96Cd",
+						 "96Cd":"100Sn",
 						 "44Ca":"48Ti",
 						 "48Ti":"52Cr",
 						 "52Cr":"56Iron",
@@ -398,9 +403,30 @@ GameManager.prototype.fusionRules =function(){ return {
 						 "68Ge":"72Se",
 						 "72Se":"76Kr",
 						 "76Kr":"80Sr",
+						 "80Sr":"84Zr",
+						 "84Zr":"88Mo",
+						 "88Mo":"92Ru",
+						 "92Ru":"96Pd",
+						 "96Pd":"100Cd",
 						 "68Zn":"72Ge",
 						 "72Ge":"76Se",
-						 "76Se":"80Kr"
+						 "76Se":"80Kr",
+						 "80Kr":"84Sr",
+						 "84Sr":"88Mo",
+						 "88Mo":"92Ru",
+						 "92Ru":"96Pd",
+						 "96Pd":"100Cd",
+						 "80Kr":"84Sr",
+						 "84Sr":"88Zr",
+						 "88Zr":"92Mo",
+						 "92Mo":"96Ru",
+						 "96Ru":"100Pd",
+						 "88Sr":"92Zr",
+						 "92Zr":"96Mo",
+						 "96Mo":"100Ru",
+	     					 //Reactions off the alpha web
+						 "95Mo":"99Ru",
+						 "94Mo":"98Ru"
 						},
     "7Beryllium":{"Hydrogen":"8B"
              },
@@ -622,6 +648,10 @@ GameManager.prototype.decay =function(){return {
     "multipler": 33.4,
     "to": "80Kr"
   },
+  "83Rb": {
+    "multipler": 86.2*86400,
+    "to": "83Kr"//A final decay product, no fusion or fission after this
+  },
   "76Sr": {
     "multipler": 7.89,
     "to": "76Rb"
@@ -630,12 +660,176 @@ GameManager.prototype.decay =function(){return {
     "multipler": 106.3*60,
     "to": "80Rb"
   },
+  "83Sr": {
+    "multipler": 32.41*3600,
+    "to": "83Rb"
+  },
   "80Y": {
     "multipler": 30.1,
     "to": "80Sr"
   },
+  "83Y": {
+    "multipler": 7.8*60,
+    "to": "83Sr"
+  },
+  "84Y": {
+    "multipler": 39.5*60,
+    "to": "84Sr"
+  },
+  "88Y": {
+    "multipler": 106.616*86400,
+    "to": "88Sr"
+  },
   "80Zr": {
     "multipler": 4.6,
     "to": "80Y"
+  },
+  "84Zr": {
+    "multipler": 25.9*60,
+    "to": "84Y"
+  },
+  "88Zr": {
+    "multipler": 83.4*86400,
+    "to": "88Y"
+  },
+  "84Nb": {
+    "multipler": 9.8,
+    "to": ["83Y","84Zr"][Math.floor(2*Math.random())]
+  },
+  "88Nb": {
+    "multipler": 14.55*60,
+    "to": "88Zr"
+  },
+  "84Mo": {
+    "multipler": 0.0038,
+    "to": "84Nb"
+  },
+  "88Mo": {
+    "multipler": 8*60,
+    "to": "88Nb"
+  },
+  "93Mo": {
+    "multipler": 4000*365.2425*86400,
+    "to": "93Nb"//Final decay product?
+  },
+  "88Tc": {
+    "multipler": 5.8,
+    "to": "88Mo"
+  },
+  "92Tc": {
+    "multipler": 4.25*60,
+    "to": "92Mo"
+  },
+  "93Tc": {
+    "multipler": 2.75*3600,
+    "to": "93Mo"
+  },
+  "94Tc": {
+    "multipler": 293*60,
+    "to": "94Mo"
+  },
+  "95Tc": {
+    "multipler": 20*3600,
+    "to": "95Mo"
+  },
+  "88Ru": {
+    "multipler": 1.3,
+    "to": "88Tc"
+  },
+  "92Ru": {
+    "multipler": 3.65*60,
+    "to": "92Tc"
+  },
+  "94Ru": {
+    "multipler": 51.8*60,
+    "to": "94Tc"
+  },
+  "95Ru": {
+    "multipler": 1.643*3600,
+    "to": "95Tc"
+  },
+  "92Rh": {
+    "multipler": 4.3,
+    "to": "92Ru"
+  },
+  "94Rh": {
+    "multipler": 70.6,
+    "to": ["93Tc","94Ru"][Math.floor(2*Math.ranodm())]
+  },
+  "95Rh": {
+    "multipler": 5.02*60,
+    "to": "95Ru"
+  },
+  "96Rh": {
+    "multipler": 9.9*60,
+    "to": "96Ru"
+  },
+  "98Rh": {
+    "multipler": 8.72*60,
+    "to": "98Ru"
+  },
+  "99Rh": {
+    "multipler": 16.1*86400,
+    "to": "99Ru"
+  },
+  "100Rh": {
+    "multipler": 20.8*3600,
+    "to": "100Ru"
+  },
+  "92Pd": {
+    "multipler": 1.1,
+    "to": "92Rh"
+  },
+  "92Pd": {
+    "multipler": 1.1,
+    "to": "92Rh"
+  },
+  "96Pd": {
+    "multipler": 122,
+    "to": "96Rh"
+  },
+  "98Pd": {
+    "multipler": 17.7*60,
+    "to": "98Rh"
+  },
+  "99Pd": {
+    "multipler": 21.4*60,
+    "to": "99Rh"
+  },
+  "100Pd": {
+    "multipler": 3.63*86400,
+    "to": "100Rh"
+  },
+  "96Ag": {
+    "multipler": 4.45,
+    "to": ["95Rh","96Pd"][Math.floor(2*Math.random())]
+  },
+  "99Ag": {
+    "multipler": 124,
+    "to": "99Pd"
+  },
+  "100Ag": {
+    "multipler": 2.01*60,
+    "to": "100Pd"
+  },
+  "96Cd": {
+    "multipler": 1,
+    "to": "96Ag"
+  },
+  "99Cd": {
+    "multipler": 16,
+    "to": ["94Rh","98Pd","99Ag"][Math.floor(3*Math.random())]
+  },
+  "100Cd": {
+    "multipler": 49.1,
+    "to": "100Ag"
+  },
+  "100In": {
+    "multipler": 5.9,
+    "to": ["99Ag","100Cd"][Math.floor(2*Math.random())]
+  },
+  "100Sn": {
+    "multipler": 1.1,
+    "to": ["99Cd","100In"][Math.floor(2*Math.random())]
   }
 }};
