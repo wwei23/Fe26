@@ -371,7 +371,7 @@ GameManager.prototype.fusionRules =function(){ return {
 							"4Helium":"7Beryllium"
 						},
   "4Helium":{"4Helium":"8Beryllium", // unstable decays into 2 4heliums
-						 "8Beryllium":"12Carbon",
+						 "8Beryllium":"12Carbon",//A/A
 						 "12Carbon":"16Oxygen",
 						 "16Oxygen":"20Neon",
 						 "20Neon":"24Magnesium", // this is a killer!
@@ -394,7 +394,9 @@ GameManager.prototype.fusionRules =function(){ return {
 						 "88Ru":"92Pd",
 						 "92Pd":"96Cd",
 						 "96Cd":"100Sn",
-						 "44Ca":"48Ti",
+						 "100Sn":"104Te",//"This game is too easy!"
+						 "104Te":"108Xe",//Then here's a challenge for you: get this isotope, 108Xe.
+						 "44Ca":"48Ti",//A/A+4
 						 "48Ti":"52Cr",
 						 "52Cr":"56Iron",
 						 "56Iron":"60Ni",
@@ -408,25 +410,39 @@ GameManager.prototype.fusionRules =function(){ return {
 						 "88Mo":"92Ru",
 						 "92Ru":"96Pd",
 						 "96Pd":"100Cd",
-						 "68Zn":"72Ge",
+						 "100Cd":"104Sn",
+						 "104Sn":"108Te",
+						 "108Te":"112Xe",
+						 "112Xe":"116Ba",
+						 "116Ba":"120Ce",
+						 "68Zn":"72Ge",//A/A+8
 						 "72Ge":"76Se",
 						 "76Se":"80Kr",
-						 "80Kr":"84Sr",
-						 "84Sr":"88Mo",
-						 "88Mo":"92Ru",
-						 "92Ru":"96Pd",
-						 "96Pd":"100Cd",
 						 "80Kr":"84Sr",
 						 "84Sr":"88Zr",
 						 "88Zr":"92Mo",
 						 "92Mo":"96Ru",
 						 "96Ru":"100Pd",
-						 "88Sr":"92Zr",
+						 "100Pd":"104Cd",
+						 "104Cd":"108Sn",
+						 "108Sn":"112Te",
+						 "112Te":"116Xe",
+						 "116Xe":"120Ba",
+						 "88Sr":"92Zr",//A/A+12
 						 "92Zr":"96Mo",
 						 "96Mo":"100Ru",
+						 "100Ru":"104Pd",
+						 "104Pd":"108Cd",
+						 "108Cd":"112Sn",
+						 "112Sn":"116Te",
+						 "116Te":"120Xe",
+						 "116Sn":"120Te",//A/A+16
 	     					 //Reactions off the alpha web
 						 "95Mo":"99Ru",
-						 "94Mo":"98Ru"
+						 "94Mo":"98Ru",
+						 "107Ag":"111Cd",
+						 "111Cd":"115Sn",
+						 "115Sn":"119Sb"
 						},
     "7Beryllium":{"Hydrogen":"8B"
              },
@@ -812,6 +828,14 @@ GameManager.prototype.decay =function(){return {
     "multipler": 2.01*60,
     "to": "100Pd"
   },
+  "104Ag": {
+    "multipler": 69.2*60,
+    "to": "104Pd"
+  },
+  "107mAg": {
+    "multipler": 44.3,
+    "to": "107Ag"
+  },
   "96Cd": {
     "multipler": 1,
     "to": "96Ag"
@@ -824,12 +848,176 @@ GameManager.prototype.decay =function(){return {
     "multipler": 49.1,
     "to": "100Ag"
   },
+  "104Cd": {
+    "multipler": 57.7*60,
+    "to": "104Ag"
+  },
+  "107Cd": {
+    "multipler": 6.5*3600,
+    "to": "107mAg"
+  },
   "100In": {
     "multipler": 5.9,
     "to": ["99Ag","100Cd"][Math.floor(2*Math.random())]
   },
+  "104In": {
+    "multipler": 1.8*60,
+    "to": "104Cd"
+  },
+  "107In": {
+    "multipler": 32.4*60,
+    "to": "107Cd"
+  },
+  "108In": {
+    "multipler": 58*60,
+    "to": "108Cd"
+  },
+  "111In": {
+    "multipler": 2.8047*86400,
+    "to": "111Cd"
+  },
   "100Sn": {
     "multipler": 1.1,
     "to": ["99Cd","100In"][Math.floor(2*Math.random())]
+  },
+  "104Sn": {
+    "multipler": 20.8,
+    "to": "104In"
+  },
+  "107Sn": {
+    "multipler": 2.9*60,
+    "to": "107In"
+  },
+  "108Sn": {
+    "multipler": 10.3*60,
+    "to": "108In"
+  },
+  "111Sn": {
+    "multipler": 35.3*60,
+    "to": "111In"
+  },
+  "108Sb": {
+    "multipler": 7.4,
+    "to": ["107In","108Sn"][Math.floor(2*Math.random())]
+  },
+  "111Sb": {
+    "multipler": 75,
+    "to": "111Sn"
+  },
+  "112Sb": {
+    "multipler": 51.4,
+    "to": "112Sn"
+  },
+  "114Sb": {
+    "multipler": 3.49*60,
+    "to": "114Sn"
+  },
+  "115Sb": {
+    "multipler": 32.1*60,
+    "to": "115Sn"
+  },
+  "116Sb": {
+    "multipler": 15.8*60,
+    "to": "116Sn"
+  },
+  "119Sb": {
+    "multipler": 38.19*3600,
+    "to": "119Sn"
+  },
+  "104Te": {
+    "multipler": 18*Math.pow(10,-9),
+    "to": "100Sn"
+  },
+  "108Te": {
+    "multipler": 2.1,
+    "to": ["104Sn","104In","107Sn","108Sb"][Math.floor(4*Math.random())]//Can these things please just decay normally and not off-web? X_X
+  },
+  "112Te": {
+    "multipler": 2*60,
+    "to": "112Sb"
+  },
+  "114Te": {
+    "multipler": 15.2*60,
+    "to": "114Sb"
+  },
+  "115Te": {
+    "multipler": 5.8*60,
+    "to": "115Sb"
+  },
+  "116Te": {
+    "multipler": 2.48*3600,
+    "to": "116Sb"
+  },
+  "112I": {
+    "multipler": 3.42,
+    "to": ["108Sn","108Sb","111Sb","112Te"][Math.floor(4*Math.random())]//-_-
+  },
+  "115I": {
+    "multipler": 1.3*60,
+    "to": "115Te"
+  },
+  "116I": {
+    "multipler": 2.91,
+    "to": "116Te"
+  },
+  "119I": {
+    "multipler": 19.1*60,
+    "to": "119Te"
+  },
+  "120I": {
+    "multipler": 81.6*60,
+    "to": "120Te"
+  },
+  "108Xe": {
+    "multipler": 58*Math.pow(10,-6),
+    "to": "104Te"
+  },
+  "112Xe": {
+    "multipler": 0.74,
+    "to": ["108Te","112I"][Math.floor(2*Math.random())]//At least not off-grid
+  },
+  "115Xe": {
+    "multipler": 18,
+    "to": ["111Sb","114Te","115I"][Math.floor(3*Math.random())]
+  },
+  "116Xe": {
+    "multipler": 59,
+    "to": "116I"
+  },
+  "119Xe": {
+    "multipler": 5.8*60,
+    "to": "119I"
+  },
+  "120Xe": {
+    "multipler": 40*60,
+    "to": "120I"
+  },
+  "116Cs": {
+    "multipler": 0.7,
+    "to": ["112Te","115I","116Xe"][Math.floor(3*Math.random())]
+  },
+  "119Cs": {
+    "multipler": 43,
+    "to": ["115Te","119Xe"][Math.floor(2*Math.random())]
+  },
+  "120Cs": {
+    "multipler": 61.2,
+    "to": ["116Te","119I","120Xe"][Math.floor(3*Math.random())]//Why so many random decays though
+  },
+  "116Ba": {
+    "multipler": 1.3,
+    "to": ["115Xe","116Cs"][Math.floor(2*Math.random())]
+  },
+  "120Ba": {
+    "multipler": 24,
+    "to": "120Cs"
+  },
+  "120La": {
+    "multipler": 2.8,
+    "to": ["119Cs","120Ba"][Math.floor(2*Math.random())]
+  },
+  "120Ce": {
+    "multipler": 0.25,
+    "to": "120La"
   }
 }};
