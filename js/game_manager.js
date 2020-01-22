@@ -948,6 +948,10 @@ GameManager.prototype.decay =function(){return {
     "multipler": 2.48*3600,
     "to": "116Sb"
   },
+  "119Te": {
+    "multipler": 16.05*3600,
+    "to": "119Sb"
+  },
   "112I": {
     "multipler": 3.42,
     "to": ["108Sn","108Sb","111Sb","112Te"][Math.floor(4*Math.random())]//-_-
