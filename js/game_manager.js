@@ -428,6 +428,11 @@ GameManager.prototype.fusionRules =function(){ return {
 						 "108Sn":"112Te",
 						 "112Te":"116Xe",
 						 "116Xe":"120Ba",
+						 "120Ba":"124Ce",
+						 "124Ce":"128Nd",
+						 "128Nd":"132Sm",
+						 "132Sm":"136Gd",
+						 "136Gd":"140Dy",
 						 "88Sr":"92Zr",//A/A+12
 						 "92Zr":"96Mo",
 						 "96Mo":"100Ru",
@@ -436,13 +441,30 @@ GameManager.prototype.fusionRules =function(){ return {
 						 "108Cd":"112Sn",
 						 "112Sn":"116Te",
 						 "116Te":"120Xe",
+						 "120Xe":"124Ba",
+						 "124Ba":"128Ce",
+						 "128Ce":"132Nd",
+						 "132Nd":"136Sm",
+						 "136Sm":"140Gd",
 						 "116Sn":"120Te",//A/A+16
+						 "120Te":"124Xe",
+						 "124Xe":"128Ba",
+						 "128Ba":"132Ce",
+						 "132Ce":"136Nd",
+						 "136Nd":"140Sm",
+						 "124Te":"128Xe",//A/A+20
+						 "128Xe":"132Ba",
+						 "132Ba":"136Ce",
+						 "136Ce":"140Nd",
 	     					 //Reactions off the alpha web
 						 "95Mo":"99Ru",
 						 "94Mo":"98Ru",
 						 "107Ag":"111Cd",
 						 "111Cd":"115Sn",
-						 "115Sn":"119Sb"
+						 "115Sn":"119Sb",
+						 "127I":"131Xe",
+						 "131Xe":"135Ba",
+						 "135Ba":"139Ce"
 						},
     "7Beryllium":{"Hydrogen":"8B"
              },
@@ -996,6 +1018,14 @@ GameManager.prototype.decay =function(){return {
     "multipler": 40*60,
     "to": "120I"
   },
+  "124Xe": {
+    "multipler": 1.8*365.2425*86400*Math.pow(10,22),//Good luck getting 124Te lol
+    "to": "124Te"
+  },
+  "127Xe": {
+    "multipler": 36.345*86400,
+    "to": "127I"
+  },
   "116Cs": {
     "multipler": 0.7,
     "to": ["112Te","115I","116Xe"][Math.floor(3*Math.random())]
@@ -1008,6 +1038,22 @@ GameManager.prototype.decay =function(){return {
     "multipler": 61.2,
     "to": ["116Te","119I","120Xe"][Math.floor(3*Math.random())]//Why so many random decays though
   },
+  "124Cs": {
+    "multipler": 30.9,
+    "to": "124Xe"
+  },
+  "127Cs": {
+    "multipler": 6.25*3600,
+    "to": "127Xe"
+  },
+  "128Cs": {
+    "multipler": 3.64*60,
+    "to": "128Xe"
+  },
+  "131Cs": {
+    "multipler": 9.689*86400,
+    "to": "131Xe"
+  },
   "116Ba": {
     "multipler": 1.3,
     "to": ["115Xe","116Cs"][Math.floor(2*Math.random())]
@@ -1016,12 +1062,208 @@ GameManager.prototype.decay =function(){return {
     "multipler": 24,
     "to": "120Cs"
   },
+  "124Ba": {
+    "multipler": 11*60,
+    "to": "124Cs"
+  },
+  "127Ba": {
+    "multipler": 12.7*60,
+    "to": "127Cs"
+  },
+  "128Ba": {
+    "multipler": 2.43*86400,
+    "to": "128Cs"
+  },
+  "130Ba": {
+    "multipler": 1.6*365.2425*86400*Math.pow(10,21),//Good luck getting 130Xe lol
+    "to": "130Xe"
+  },
+  "131Ba": {
+    "multipler": 11.5*86400,
+    "to": "131Cs"
+  },
   "120La": {
     "multipler": 2.8,
     "to": ["119Cs","120Ba"][Math.floor(2*Math.random())]
   },
+  "124La": {
+    "multipler": 29.21,
+    "to": "124Ba"
+  },
+  "127La": {
+    "multipler": 5.1*60,
+    "to": "127Ba"
+  },
+  "128La": {
+    "multipler": 5.18*60,
+    "to": "128Ba"
+  },
+  "130La": {
+    "multipler": 8.7*60,
+    "to": "130Ba"
+  },
+  "131La": {
+    "multipler": 59*60,
+    "to": "131Ba"
+  },
+  "132La": {
+    "multipler": 4.8*3600,
+    "to": "132Ba"
+  },
+  "135La": {
+    "multipler": 11.7*3600,
+    "to": "135Ba"
+  },
   "120Ce": {
     "multipler": 0.25,
     "to": "120La"
+  },
+  "124Ce": {
+    "multipler": 9.1,
+    "to": "124La"
+  },
+  "127Ce": {
+    "multipler": 29,
+    "to": "127La"
+  },
+  "128Ce": {
+    "multipler": 3.93*60,
+    "to": "128La"
+  },
+  "131Ce": {
+    "multipler": 10.2*60,
+    "to": "131La"
+  },
+  "132Ce": {
+    "multipler": 3.51*3600,
+    "to": "132La"
+  },
+  "135Ce": {
+    "multipler": 17.7*3600,
+    "to": "135La"
+  },
+  "139Ce": {
+    "multipler": 137.641*86400,
+    "to": "139La"
+  },
+  "128Pr": {
+    "multipler": 2.84,
+    "to": ["127La","128Ce"][Math.floor(2*Math.random())]
+  },
+  "131Pr": {
+    "multipler": 1.5*60,
+    "to": "131Ce"
+  },
+  "132Pr": {
+    "multipler": 1.49*60,
+    "to": "132Ce"
+  },
+  "135Pr": {
+    "multipler": 24*60,
+    "to": "135Ce"
+  },
+  "136Pr": {
+    "multipler": 50.65*60,
+    "to": "136Ce"
+  },
+  "139Pr": {
+    "multipler": 4.41*3600,
+    "to": "139Ce"
+  },
+  "140Pr": {
+    "multipler": 3.39*60,
+    "to": "140Ce"
+  },
+  "128Nd": {
+    "multipler": 4.9,
+    "to": ["127Ce","128Pr"][Math.floor(2*Math.random())]
+  },
+  "131Nd": {
+    "multipler": 33,
+    "to": ["130Ce","131Pr"][Math.floor(2*Math.random())]
+  },
+  "132Nd": {
+    "multipler": 1.56*60,
+    "to": "132Pr"
+  },
+  "135Nd": {
+    "multipler": 12.4*60,
+    "to": "135Pr"
+  },
+  "136Nd": {
+    "multipler": 50.65*60,
+    "to": "136Pr"
+  },
+  "139Nd": {
+    "multipler": 29.7*60,
+    "to": "139Pr"
+  },
+  "140Nd": {
+    "multipler": 3.37*86400,
+    "to": "140Pr"
+  },
+  "132Pm": {
+    "multipler": 6.2,
+    "to": ["131Pr","132Nd"][Math.floor(2*Math.random())]
+  },
+  "135Pm": {
+    "multipler": 49,
+    "to": "135Nd"
+  },
+  "136Pm": {
+    "multipler": 107,
+    "to": "136Nd"
+  },
+  "139Pm": {
+    "multipler": 4.15*60,
+    "to": "139Nd"
+  },
+  "140Pm": {
+    "multipler": 9.2,
+    "to": "140Nd"
+  },
+  "132Sm": {
+    "multipler": 4,
+    "to": ["131Nd","132Pm"][Math.floor(2*Math.random())]
+  },
+  "136Sm": {
+    "multipler": 47,
+    "to": "136Pm"
+  },
+  "139Sm": {
+    "multipler": 2.57*60,
+    "to": "139Pm"
+  },
+  "140Sm": {
+    "multipler": 14.82*60,
+    "to": "140Pm"
+  },
+  "136Eu": {
+    "multipler": 3.3,
+    "to": ["135Pm","136Sm"][Math.floor(2*Math.random())]
+  },
+  "139Eu": {
+    "multipler": 17.9,
+    "to": "139Sm"
+  },
+  "140Eu": {
+    "multipler": 1.51,
+    "to": "140Sm"
+  },
+  "136Gd": {
+    "multipler": 1,
+    "to": "136Eu"
+  },
+  "140Gd": {
+    "multipler": 15.8,
+    "to": "140Eu"
+  },
+  "140Tb": {
+    "multipler": 2.4,
+    "to": ["139Eu","140Gd"][Math.floor(2*Math.random())]
+  },
+  "140Dy": {
+    "multipler": 0.7,
+    "to": "140Tb"
   }
 }};
